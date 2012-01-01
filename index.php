@@ -50,7 +50,7 @@
     <nav>
       <ul class="link">
         <li>
-          <a href="http://www.poul.org">Cos'è il POul</a>
+          <a href="http://www.poul.org">Cos'è il POuL</a>
         </li>
         <li>
           <a href="bits_info.html">Cos'è BITS</a>
