@@ -86,7 +86,23 @@ ul.link li {
   content: "Sede chiusa ";
   color: #FF0000;
 }
+/*
+.status div:before {
+  display: none;
+}
 
+.status div:after {
+  display: none;
+}
+
+.status li:after {
+  display: none;
+}
+
+.status li:before {
+  display: none;
+}
+*/
 .status #temp:before {
   content: "Temperatura: ";
   padding-right: .5em;
@@ -164,4 +180,3 @@ nav#prec_next ul li {
 #sede .modified_by:before {
   content: "da ";
 }
-

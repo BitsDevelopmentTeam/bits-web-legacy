@@ -41,9 +41,6 @@
     <header class="logo">
       <h1>B.I.T.S.</h1>
       <h2>System&nbsp;&nbsp;2.0</h2>
-      <?php
-        echo $rettemp_count;
-      ?>
     </header>
   </a>
   <aside>
