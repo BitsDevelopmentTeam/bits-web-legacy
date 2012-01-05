@@ -2,7 +2,7 @@
 
 function fakeWs() {
   var self = this;
-  var fakeUrl = "http://bits.poul.org:8080/data.json";
+  var fakeUrl = "http://bits.poul.org/data.json";
   var xhr = new XMLHttpRequest;
   xhr.open("GET",fakeUrl,true);
   xhr.onreadystatechange = function() {

@@ -43,7 +43,7 @@ function tempIntHandler(tempInt,first) {
 }
 
 function show(elem) {
-  elem.setAttribute("style", "");
+  elem.setAttribute("style", "display: block");
 }
 
 function round(num, dec) {
