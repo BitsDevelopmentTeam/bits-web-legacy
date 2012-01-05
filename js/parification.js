@@ -10,11 +10,11 @@ Number.prototype.round = function(dec) {
 
 function fakeWs() {
   var self = this;
-  var fakeUrl = "http://bits.poul.org:8080";
+  var fakeUrl = "http://bits.poul.org:8080/data.json";
   var xhr = new XMLHttpRequest;
   xhr.open("GET",fakeUrl,true);
   xhr.onreadystatechange = function() {
-    self.onmessage({data: xhr.responseText});
+    self["onmessage"]({data: xhr.responseText});
   }
   xhr.send();
 }
