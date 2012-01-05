@@ -1,13 +1,5 @@
 (function(global) {
 
-String.prototype.escapeHTML = function() {
-  return this.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-Number.prototype.round = function(dec) {
-	return Math.round(this*Math.pow(10,dec))/Math.pow(10,dec);
-}
-
 function fakeWs() {
   var self = this;
   var fakeUrl = "http://bits.poul.org:8080/data.json";

@@ -1,80 +1,42 @@
-(function(global) {
+(function(exports) {
 
-var innerGlobal = this;
-
-/* DOM Selecting initialization */
-window.addEventListener("DOMContentLoaded", function() {
-  innerGlobal.sede = document.getElementById("sede");
-  innerGlobal.sedeValue = sede.querySelector(".value");
-  innerGlobal.sedeTimestamp = sede.querySelector(".timestamp");
-  innerGlobal.sedeModifiedBy = sede.querySelector(".modified_by");
-
-  innerGlobal.temp = document.getElementById("temp");
-
-  innerGlobal.msg = document.querySelector("#last.msg");
-  innerGlobal.msgUser = msg.querySelector(".user");
-  innerGlobal.msgTimestamp = msg.querySelector(".timestamp");
-  innerGlobal.msgValue = msg.querySelector(".value");
-  innerGlobal.first = true;
-});
-/* Pivot */
-
-/* Handler functions definition */
-function statusHandler(status) {
-  var value = status.value == "open" ? "open" : "close";
-  sedeValue.setAttribute("class",value+" value");
-  sedeTimestamp.innerHTML = status.timestamp;
-  sedeModifiedBy.innerHTML = status.modifiedby;
+function Handler(diffHandler) {
+  this.data = "";
+  this.diffHandler = diffHandler;
+  this.firstHandle = true;
 }
 
-function msgHandler(msg) {
-  /* pass
-  msgUser.innerHTML = msg.user;
-  msgTimestamp.innerHTML = msg.timestamp;
-  msgValue.innerHTML = msg.value;
-  */
+Handler.prototype.webSocket = function(event) {
+  this.data = Handler.escapeHTML(event.data);
+  this.handle();
 }
 
-function tempIntHandler(tempInt) {
-  temp.innerHTML = tempInt.value.round(1);
-  temp.setAttribute("class", tempInt.value > 20 ? "high" : "low" );
+Handler.prototype.handle = function() {
+  this.jsonHandler();
 }
 
-function hide(elem) {
-  elem.setAttribute("style", "display: none");
-}
-
-function jsonHandler(json) {
+Handler.prototype.jsonHandler = function() {
+  var json = JSON.parse(this.data);
   if(json.status !== undefined) {
-    statusHandler(json.status)
-  } else if(first) {
-    hide(sede);
+    this.diffHandler.status(json.status, this.firstHandle);
   }
 
   if(json.msg !== undefined) {
-    msgHandler(json.msg);
-  } else if(first) {
-    hide(msg);
+    this.diffHandler.msg(json.msg, this.firstHandle);
   }
   
   if(json.tempint !== undefined) {
-    tempIntHandler(json.tempint);
-  } else if(first) {
-    hide(temp);
+    this.diffHandler.tempInt(json.tempint, this.firstHandle);
   }
 
-  if(first) first = false;
+  if(this.firstHandle) this.firstHandle = false;
 }
 
-function dataHandler(data) {
-  jsonHandler(JSON.parse(data));
+Handler.escapeHTML = function(string) {
+  return string.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-function wsMessageHandler(event) {
-  dataHandler(event.data.escapeHTML());
-}
-
-global.wsMessageHandler = wsMessageHandler;
+exports.Handler = Handler;
 
 })(this)
 
