@@ -19,7 +19,5 @@ function fakeWs() {
   xhr.send();
 }
 
-if (global["WebSocket"] === undefined)
-  global["WebSocket"] = MozWebSocket || fakeWs;
-
+global.WebSocket = global.WebSocket || global.MozWebSocket || fakeWs;
 })(this);
