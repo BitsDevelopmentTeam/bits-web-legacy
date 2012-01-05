@@ -20,12 +20,6 @@
   <title>Storico B.I.T.S.</title>
   <link rel="stylesheet" type="text/css" href="./css/default.css" />
   <link rel="icon" href="img/favicon.ico" />
-  <?php 
-    //if($page == 1) {
-    //  echo '<script src="http://bits.poul.org:8080" type="text/javascript"></script>';
-    //  echo '<script src="./js/pushStorico.js" type="text/javascript"></script>';
-    //}
-  ?>
 </head>
 <body>
   <a href="/">
@@ -33,7 +27,7 @@
       <h1>B.I.T.S.</h1>
       <h2>Storico</h2>
     </header>
-  </a>
+ </a>
   <aside>
     <nav>
       <ul class="link">
