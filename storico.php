@@ -20,6 +20,9 @@
   <title>Storico B.I.T.S.</title>
   <link rel="stylesheet" type="text/css" href="./css/default.css" />
   <link rel="icon" href="img/favicon.ico" />
+  <!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+  <![endif]-->
 </head>
 <body>
   <a href="/">
