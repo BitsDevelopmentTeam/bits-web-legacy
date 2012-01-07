@@ -91,6 +91,10 @@ ul.link li {
   display: none;
 }
 
+.status > ul > li#graph {
+  display: block;
+}
+
 .status #temp:before {
   content: "Temperatura: ";
   padding-right: .5em;
