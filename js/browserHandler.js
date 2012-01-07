@@ -16,6 +16,7 @@ window.addEventListener("DOMContentLoaded", function() {
   global.msgTimestamp = msg.querySelector(".timestamp");
   global.msgValue = msg.querySelector(".value");
   global.title = document.title;
+  global.favicon = document.querySelector('[rel="icon"]');
 });
 /* Pivot */
 
@@ -23,6 +24,7 @@ window.addEventListener("DOMContentLoaded", function() {
 function statusHandler(status,first) {
   if(first) show(sede);
   var value = status.value == "open" ? "open" : "close";
+  changeIcon(value);
   document.title = capitalize(value)+" "+title;
   sedeValue.setAttribute("class",value+" value");
   sedeTimestamp.innerHTML = status.timestamp;
@@ -53,9 +55,20 @@ function show(elem) {
 function capitalize(string) {
   return string.charAt(0).toUpperCase()+string.slice(1);
 }
+
 function round(num, dec) {
 	return Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
 }
+
+function changeIcon(status) {
+  var url = "img/" + status + ".ico";
+  changeFavicon(favicon, url);
+}
+
+function changeFavicon(faviconEl, url) {
+  faviconEl.setAttribute("href",url);
+}
+
 
 /* END HELPERS */
 
