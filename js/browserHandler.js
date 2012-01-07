@@ -10,6 +10,8 @@ window.addEventListener("DOMContentLoaded", function() {
   global.sedeModifiedBy = sede.querySelector(".modified_by");
 
   global.temp = document.getElementById("temp");
+  global.tempValue = temp.querySelector(".value");
+  global.tempTrend = temp.querySelector(".trend");
 
   global.msg = document.querySelector("#last.msg");
   global.msgUser = msg.querySelector(".user");
@@ -18,6 +20,7 @@ window.addEventListener("DOMContentLoaded", function() {
   global.title = document.title;
   global.favicon = document.querySelector('[rel="icon"]');
   global.head = document.head || document.getElementsByTagName('head')[0];
+  global.trend = new Trend();
 });
 /* Pivot */
 
@@ -43,7 +46,8 @@ function msgHandler(msg,first) {
 
 function tempIntHandler(tempInt,first) {
   if(first) show(temp);
-  temp.innerHTML = round(tempInt.value,1);
+  tempValue.innerHTML = round(tempInt.value,1);
+  tempTrend.innerHTML = trend.newTemp(tempInt);
   temp.setAttribute("class", tempInt.value > 20 ? "high" : "low" );
 }
 
@@ -68,6 +72,26 @@ function changeIcon(status) {
   link.rel = "shortcut icon";
   head.appendChild(link);
   favicon = link;
+}
+
+function Trend() {
+  this.oldTemp = undefined;
+}
+
+Trend.prototype.newTemp = function (temp) {
+  var diff = 0;
+  if(this.oldTemp !== undefined) {
+    diff = temp-this.oldTemp;
+  }
+  this.oldTemp = temp;
+
+  if (diff == 0) {
+    return "→";
+  } else if (diff > 0) {
+    return "↗";
+  } else {
+    return "↘";
+  }
 }
 
 /* END HELPERS */

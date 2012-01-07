@@ -97,6 +97,10 @@ ul.link li {
   font-weight: bold;
 }
 
+.status #temp > div {
+  display: inline;
+}
+
 .status #temp.high {
   color: #FF6600;
 }
