@@ -46,7 +46,7 @@ function msgHandler(msg,first) {
 
 function tempIntHandler(tempInt,first) {
   if(first) show(temp);
-  tempValue.innerHTML = round(tempInt.value,1);
+  tempValue.innerHTML = round(tempInt.value,1)+"°";
   tempTrend.innerHTML = trend.newTemp(tempInt);
   temp.setAttribute("class", tempInt.value > 20 ? "high" : "low" );
 }
