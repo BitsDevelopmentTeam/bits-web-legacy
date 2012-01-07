@@ -15,6 +15,7 @@ window.addEventListener("DOMContentLoaded", function() {
   global.msgUser = msg.querySelector(".user");
   global.msgTimestamp = msg.querySelector(".timestamp");
   global.msgValue = msg.querySelector(".value");
+  global.title = document.title;
 });
 /* Pivot */
 
@@ -22,6 +23,7 @@ window.addEventListener("DOMContentLoaded", function() {
 function statusHandler(status,first) {
   if(first) show(sede);
   var value = status.value == "open" ? "open" : "close";
+  document.title = capitalize(value)+" "+title;
   sedeValue.setAttribute("class",value+" value");
   sedeTimestamp.innerHTML = status.timestamp;
   sedeModifiedBy.innerHTML = status.modifiedby;
@@ -42,13 +44,20 @@ function tempIntHandler(tempInt,first) {
   temp.setAttribute("class", tempInt.value > 20 ? "high" : "low" );
 }
 
+/* HELPERS */
+
 function show(elem) {
   elem.setAttribute("style", "display: block");
 }
 
+function capitalize(string) {
+  return string.charAt(0).toUpperCase()+string.slice(1);
+}
 function round(num, dec) {
 	return Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
 }
+
+/* END HELPERS */
 
 exports.browserHandler = {
   status: statusHandler,
