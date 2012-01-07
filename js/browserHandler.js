@@ -17,6 +17,7 @@ window.addEventListener("DOMContentLoaded", function() {
   global.msgValue = msg.querySelector(".value");
   global.title = document.title;
   global.favicon = document.querySelector('[rel="icon"]');
+  global.head = document.head || document.getElementsByTagName('head')[0];
 });
 /* Pivot */
 
@@ -61,14 +62,13 @@ function round(num, dec) {
 }
 
 function changeIcon(status) {
-  var url = "img/" + status + ".ico";
-  changeFavicon(favicon, url);
+  var link = document.createElement("link");
+  head.removeChild(favicon);
+  link.href = "img/" + status + ".ico";
+  link.rel = "shortcut icon";
+  head.appendChild(link);
+  favicon = link;
 }
-
-function changeFavicon(faviconEl, url) {
-  faviconEl.setAttribute("href",url);
-}
-
 
 /* END HELPERS */
 
