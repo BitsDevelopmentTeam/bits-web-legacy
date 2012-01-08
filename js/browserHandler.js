@@ -47,7 +47,7 @@ function msgHandler(msg,first) {
 function tempIntHandler(tempInt,first) {
   if(first) show(temp);
   tempValue.innerHTML = round(tempInt.value,1)+"°C";
-  tempTrend.innerHTML = trend.newTemp(tempInt);
+  tempTrend.innerHTML = trend.newValue(tempInt);
   temp.setAttribute("class", tempInt.value > 20 ? "high" : "low" );
 }
 
@@ -75,15 +75,15 @@ function changeIcon(status) {
 }
 
 function Trend() {
-  this.oldTemp = undefined;
+  this.oldValue = undefined;
   this.diff = 0;
 }
 
-Trend.prototype.newTemp = function (temp) {
-  if(this.oldTemp !== undefined) {
-    this.diff = temp-this.oldTemp;
+Trend.prototype.newValue = function (value) {
+  if(this.oldValue !== undefined) {
+    this.diff = temp-this.oldValue;
   }
-  this.oldTemp = temp;
+  this.oldValue = temp;
 
   return this;
 }
