@@ -76,18 +76,22 @@ function changeIcon(status) {
 
 function Trend() {
   this.oldTemp = undefined;
+  this.diff = 0;
 }
 
 Trend.prototype.newTemp = function (temp) {
-  var diff = 0;
   if(this.oldTemp !== undefined) {
-    diff = temp-this.oldTemp;
+    this.diff = temp-this.oldTemp;
   }
   this.oldTemp = temp;
 
-  if (diff == 0) {
+  return this;
+}
+
+Trend.prototype.toString = function() {
+  if (this.diff == 0) {
     return "→";
-  } else if (diff > 0) {
+  } else if (this.diff > 0) {
     return "↗";
   } else {
     return "↘";
