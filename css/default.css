@@ -33,7 +33,7 @@ a[href="/"] {
 
 header.logo {
   position: relative;
-  background: url("http://bits.poul.org/img/bits_bg.png");
+  background: url("img/bits_bg.png");
   margin-left: auto;
   margin-right: auto;
   text-align: left;

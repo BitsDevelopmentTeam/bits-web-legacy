@@ -5,20 +5,32 @@ var global = this;
 /* DOM Selecting initialization */
 window.onload = function() {
   global.sede = document.getElementById("sede");
-  global.sedeValue = sede.querySelector(".value");
-  global.sedeTimestamp = sede.querySelector(".timestamp");
-  global.sedeModifiedBy = sede.querySelector(".modified_by");
+  //Commented line for gay browsers compatibility
+  //global.sedeValue = sede.querySelector(".value");
+  global.sedeValue = sede.firstChild;
+  //global.sedeTimestamp = sede.querySelector(".timestamp");
+  global.sedeTimestamp = sede.children[1];
+  //global.sedeModifiedBy = sede.querySelector(".modified_by");
+  global.sedeModifiedBy = sede.children[2];
 
   global.temp = document.getElementById("temp");
-  global.tempValue = temp.querySelector(".value");
-  global.tempTrend = temp.querySelector(".trend");
+  //global.tempValue = temp.querySelector(".value");
+  global.tempValue = temp.firstChild;
+  //global.tempTrend = temp.querySelector(".trend");
+  global.tempTrend = temp.children[1];
 
-  global.msg = document.querySelector("#last.msg");
-  global.msgUser = msg.querySelector(".user");
-  global.msgTimestamp = msg.querySelector(".timestamp");
-  global.msgValue = msg.querySelector(".value");
+  //global.msg = document.querySelector("#last.msg");
+  global.msg = document.getElementById("last");
+  //global.msgUser = msg.querySelector(".user");
+  global.msgUser = msg.firstChild;
+  //global.msgTimestamp = msg.querySelector(".timestamp");
+  global.msgTimestamp = msg.children[1];
+  //global.msgValue = msg.querySelector(".value");
+  global.msgValue = msg.children[2];
+
   global.title = document.title;
-  global.favicon = document.querySelector('[rel="icon"]');
+  //global.favicon = document.querySelector('[rel="icon"]');
+  global.favicon = document.getElementById("favicon");
   global.head = document.head || document.getElementsByTagName('head')[0];
   global.trend = new Trend();
 }
