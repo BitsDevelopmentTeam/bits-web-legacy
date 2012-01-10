@@ -12,6 +12,14 @@ function fakeWs() {
   xhr.send();
 }
 
+global.addEvent = function(obj,event,callback) {
+  if(obj.addEventListener !== undefined) {
+    obj.addEventListener(event,callback);
+  } else if (obj.attachEvent !== undefined) {
+    obj.attachEvent(event,callback);
+  }
+}
+
 if(document.attachEvent !== undefined)
   document.addEventListener = document.attachEvent;
 

@@ -3,30 +3,30 @@
 var global = this;
 
 /* DOM Selecting initialization */
-window.addEventListener("load",function() {
+addEvent(window,"load",function() {
   global.sede = document.getElementById("sede");
   //Commented line for gay browsers compatibility
   //global.sedeValue = sede.querySelector(".value");
-  global.sedeValue = sede.firstChild;
+  global.sedeValue = sede.childNodes[1];
   //global.sedeTimestamp = sede.querySelector(".timestamp");
-  global.sedeTimestamp = sede.children[1];
+  global.sedeTimestamp = sede.childNodes[3];
   //global.sedeModifiedBy = sede.querySelector(".modified_by");
-  global.sedeModifiedBy = sede.children[2];
+  global.sedeModifiedBy = sede.childNodes[5];
 
   global.temp = document.getElementById("temp");
   //global.tempValue = temp.querySelector(".value");
-  global.tempValue = temp.firstChild;
+  global.tempValue = temp.childNodes[1];
   //global.tempTrend = temp.querySelector(".trend");
-  global.tempTrend = temp.children[1];
+  global.tempTrend = temp.childNodes[3];
 
   //global.msg = document.querySelector("#last.msg");
   global.msg = document.getElementById("last");
   //global.msgUser = msg.querySelector(".user");
-  global.msgUser = msg.firstChild;
+  global.msgUser = msg.childNodes[1];
   //global.msgTimestamp = msg.querySelector(".timestamp");
-  global.msgTimestamp = msg.children[1];
+  global.msgTimestamp = msg.childNodes[2];
   //global.msgValue = msg.querySelector(".value");
-  global.msgValue = msg.children[2];
+  global.msgValue = msg.childNodes[3];
 
   global.title = document.title;
   //global.favicon = document.querySelector('[rel="icon"]');
