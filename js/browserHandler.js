@@ -37,6 +37,7 @@ window.onload = function() {
 /* Pivot */
 
 /* Handler functions definition */
+// Handle BITS status change.
 function statusHandler(status,first) {
   if(first) show(sede);
   var value = status.value == "open" ? "open" : "close";
@@ -47,6 +48,7 @@ function statusHandler(status,first) {
   sedeModifiedBy.innerHTML = status.modifiedby;
 }
 
+// Handle MSGs arrival (somewhere in the future)
 function msgHandler(msg,first) {
   /* pass
   if(first) show(msg);
@@ -56,6 +58,7 @@ function msgHandler(msg,first) {
   */
 }
 
+// Handle tempInt arrival
 function tempIntHandler(tempInt,first) {
   if(first) show(temp);
   tempValue.innerHTML = round(tempInt.value,1)+"°C";
@@ -65,18 +68,22 @@ function tempIntHandler(tempInt,first) {
 
 /* HELPERS */
 
+// Show a DOM hidden element
 function show(elem) {
   elem.setAttribute("style", "display: block");
 }
 
+// Return a new string capitalized
 function capitalize(string) {
   return string.charAt(0).toUpperCase()+string.slice(1);
 }
 
+// Round a number (num) at the first nth decimal (dec)
 function round(num, dec) {
 	return Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
 }
 
+// Change the favicon icon of the site.
 function changeIcon(status) {
   var link = document.createElement("link");
   head.removeChild(favicon);
@@ -86,6 +93,15 @@ function changeIcon(status) {
   favicon = link;
 }
 
+// the Trend object contains an old state off the value defined
+//  - newValue
+//      add a new state to the _oldValue_  state and 
+//      assign the difference between the new state and the
+//      old value to the _diff_ state.
+//
+//  - toString
+//      Respond to the toString message, transorm the object in an intelligible form.
+//      In this case the trend arcs.
 function Trend() {
   this.oldValue = undefined;
   this.diff = 0;
@@ -112,6 +128,7 @@ Trend.prototype.toString = function() {
 
 /* END HELPERS */
 
+// Exports only the browserHandler object in the global scope
 exports.browserHandler = {
   status: statusHandler,
   msg: msgHandler,
