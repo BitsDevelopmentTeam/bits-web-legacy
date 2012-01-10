@@ -11,8 +11,8 @@ function fakeWs() {
   xhr.send();
 }
 
-if(document.addEventListener === undefined)
-  location.href = "http://nyan.cat/"
+if(document.attachEvent !== undefined)
+  location.href = "http://nyan.cat/";
 
 global.WebSocket = global.WebSocket || global.MozWebSocket || fakeWs;
 
