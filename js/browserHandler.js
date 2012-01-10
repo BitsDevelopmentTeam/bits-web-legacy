@@ -3,7 +3,7 @@
 var global = this;
 
 /* DOM Selecting initialization */
-window.onload = function() {
+window.addEventListener("load",function() {
   global.sede = document.getElementById("sede");
   //Commented line for gay browsers compatibility
   //global.sedeValue = sede.querySelector(".value");
@@ -33,7 +33,7 @@ window.onload = function() {
   global.favicon = document.getElementById("favicon");
   global.head = document.head || document.getElementsByTagName('head')[0];
   global.trend = new Trend();
-}
+});
 /* Pivot */
 
 /* Handler functions definition */

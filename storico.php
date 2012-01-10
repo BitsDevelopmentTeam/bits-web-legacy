@@ -19,7 +19,7 @@
   <meta charset="UTF-8">
   <title>Storico B.I.T.S.</title>
   <link rel="stylesheet" type="text/css" href="./css/default.css" />
-  <link rel="icon" href="img/open.ico" />
+  <link rel="icon" href="img/open.ico" id="favicon" />
 </head>
 <body>
   <a href="/">

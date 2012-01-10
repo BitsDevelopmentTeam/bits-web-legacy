@@ -12,9 +12,8 @@ function fakeWs() {
   xhr.send();
 }
 
-// Check naive DOM implementation and redirect to nyan.cat. (For example IE ;-) )
 if(document.attachEvent !== undefined)
-  location.href = "http://nyan.cat/";
+  document.addEventListener = document.attachEvent;
 
 global.WebSocket = global.WebSocket || global.MozWebSocket || fakeWs;
 
