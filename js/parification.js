@@ -24,5 +24,6 @@ if(document.attachEvent !== undefined)
   document.addEventListener = document.attachEvent;
 
 global.WebSocket = global.WebSocket || global.MozWebSocket || fakeWs;
+global.fakeWs = fakeWs;
 
 })(this);
