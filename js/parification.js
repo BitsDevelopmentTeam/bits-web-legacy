@@ -8,7 +8,7 @@
             self = this;
 
         xhr.open("GET", fakeUrl, true);
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function handler() {
             if (self.onmessage !== undefined) {
                 if (xhr.readyState === 4) {
                     self.onmessage({data: xhr.responseText});
@@ -16,7 +16,7 @@
             } else {
                 i += 1;
                 setTimeout(function () {
-                    xhr.onreadystatechange();
+                    handler();
                 }, 100 * i);
             }
         };
@@ -36,5 +36,4 @@
     }
 
     exports.WebSocket = exports.WebSocket || exports.MozWebSocket || fakeWs;
-
 }(this));

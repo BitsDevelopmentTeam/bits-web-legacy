@@ -17,11 +17,6 @@
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    // Round a number (num) at the first nth decimal (dec)
-    function round(num, dec) {
-        return Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
-    }
-
     // Change the favicon icon of the site.
     function changeIcon(status) {
         var link = exports.document.createElement("link");
@@ -95,7 +90,7 @@
         }
         var value = status.value === "open" ? "open" : "close";
         changeIcon(value);
-        title = capitalize(value) + " " + title;
+        exports.document.title = capitalize(value) + " " + title;
         sedeValue.setAttribute("class", value + " value");
         sedeTimestamp.innerHTML = status.timestamp;
         sedeModifiedBy.innerHTML = status.modifiedby;
@@ -116,8 +111,8 @@
         if (first) {
             show(temp);
         }
-        tempValue.innerHTML = round(tempInt.value, 1) + "°C";
-        tempTrend.innerHTML = trend.newValue(tempInt);
+        tempValue.innerHTML = tempInt.value.toPrecision(2) + "°C";
+        tempTrend.innerHTML = trend.newValue(tempInt.value);
         temp.setAttribute("class", tempInt.value > 20 ? "high" : "low");
     }
 
