@@ -23,14 +23,6 @@
         xhr.send();
     };
 
-    exports.addEvent = function (obj, event, callback) {
-        if (obj.addEventListener !== undefined) {
-            obj.addEventListener(event, callback);
-        } else if (obj.attachEvent !== undefined) {
-            obj.attachEvent(event, callback);
-        }
-    };
-
     function isChrome() {
         return exports.navigator.userAgent.indexOf("Chrome") !== -1;
     }

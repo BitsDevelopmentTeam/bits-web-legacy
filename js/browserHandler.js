@@ -69,7 +69,7 @@
 
 
     /* DOM Selecting initialization */
-    exports.addEvent(exports.window, "load", function () {
+    exports.window.addEventListener("DOMContentLoaded", function () {
         sede = exports.document.getElementById("sede");
         sedeValue = sede.querySelector(".value");
         sedeTimestamp = sede.querySelector(".timestamp");
