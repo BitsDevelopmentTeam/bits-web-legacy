@@ -9,6 +9,6 @@
   $format = $_GET["format"];
   if ($format == "text") {
     header("Content-Type: text/plain");
-    echo ($retdata[0] ? 1 : 0);
+    echo ($retdata["value"] ? 1 : 0);
   }
 ?>
