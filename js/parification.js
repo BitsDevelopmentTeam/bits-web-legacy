@@ -1,6 +1,6 @@
 (function (exports) {
     "use strict";
-    // Implements a WS XHR fallback replacement
+    // Implements a WS fallback via XHR
     var fakeWs = function () {
         var fakeUrl = "http://bits.poul.org/data.json",
             xhr = new exports.XMLHttpRequest(),
