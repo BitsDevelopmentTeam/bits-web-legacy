@@ -34,7 +34,7 @@ module("debug", function (require, exports) {
                     str += " ";
                     str += inspect(arguments[i]);
                 }
-                if(console && console.log) {
+                if (console && console.log) {
                     console.log(str);
                 }
             }

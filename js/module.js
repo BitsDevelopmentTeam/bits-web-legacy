@@ -16,14 +16,14 @@
     function loadPage() {
         if (domready === false) {
             var i = 0, len = functions_buffer.length;
-            while ( i < len ) {
+            while (i < len) {
                 functions_buffer[i](require);
                 i += 1;
             }
             domready = true;
         }
     }
-    
+
     function main(callback) {
         if (domready === false) {
             functions_buffer[functions_buffer.length] = callback;
@@ -31,7 +31,7 @@
             callback(require);
         }
     }
-    
+
     if (exports.addEventListener !== undefined) {
         exports.addEventListener("DOMContentLoded", loadPage, false);
         exports.addEventListener("load", loadPage, false);
