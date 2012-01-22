@@ -3,6 +3,7 @@ module("browser_handler", function (require, exports) {
 
     var doc = require("document"),
         debug = require("debug"),
+        query = require("peppy").query,
 
         sede,
         sedeValue,
@@ -99,28 +100,28 @@ module("browser_handler", function (require, exports) {
     main(function () {
         sede = doc.getElementById("sede");
         swith(sede, function () {
-            sedeValue = sede.querySelector(".value");
-            sedeTimestamp = sede.querySelector(".timestamp");
-            sedeModifiedBy = sede.querySelector(".modified_by");
+            sedeValue = query(".value", sede)[0];
+            sedeTimestamp = query(".timestamp", sede)[0];
+            sedeModifiedBy = query(".modified_by", sede)[0];
         });
 
         temp = doc.getElementById("temp");
         swith(temp, function () {
-            tempValue = temp.querySelector(".value");
-            tempTrend = temp.querySelector(".trend");
+            tempValue = query(".value", temp)[0];
+            tempTrend = query(".trend", temp)[0];
         });
 
-        msg = doc.querySelector("#last.msg");
+        msg = query("#last.msg")[0];
         swith(msg, function () {
-            msgUser = msg.querySelector(".user");
-            msgTimestamp = msg.querySelector(".timestamp");
-            msgValue = msg.querySelector(".value");
+            msgUser = query(".user", msg)[0];
+            msgTimestamp = query(".timestamp", msg)[0];
+            msgValue = query(".value", msg)[0];
         });
 
         title = doc.title;
         swith(title);
 
-        favicon = doc.querySelector('[rel="icon"]');
+        favicon = query('[rel="icon"]')[0];
         swith(favicon);
 
         head = doc.head || doc.getElementsByTagName('head')[0];
