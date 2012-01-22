@@ -1,5 +1,8 @@
-(function (exports) {
+module("handler", function (require, exports) {
     "use strict";
+
+    var debug = require("debug");
+
     function Handler(diffHandler) {
         this.data = "";
         this.diffHandler = diffHandler;
@@ -7,6 +10,7 @@
     }
 
     Handler.prototype.webSocket = function (event) {
+        debug.log("Incoming data", event.data);
         this.data = Handler.escapeHTML(event.data);
         this.handle();
     };
@@ -18,18 +22,22 @@
     Handler.prototype.jsonHandler = function () {
         var json = JSON.parse(this.data);
         if (json.status !== undefined) {
+            debug.log("New Status", json.status);
             this.diffHandler.status(json.status, this.firstHandle);
         }
 
         if (json.msg !== undefined) {
+            debug.log("New Msg", json.msg);
             this.diffHandler.msg(json.msg, this.firstHandle);
         }
 
         if (json.tempint !== undefined) {
+            debug.log("New tempInt", json.tempint);
             this.diffHandler.tempInt(json.tempint, this.firstHandle);
         }
 
         if (this.firstHandle) {
+            debug.log("First JSON arrived");
             this.firstHandle = false;
         }
     };
@@ -40,6 +48,6 @@
 
     exports.Handler = Handler;
 
-}(this));
+});
 
 /* You have to read the code bottom-up */

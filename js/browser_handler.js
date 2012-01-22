@@ -1,25 +1,43 @@
-(function (exports) {
+module("browser_handler", function (require, exports) {
     "use strict";
-    var sede, sedeValue, sedeTimestamp, sedeModifiedBy,
-        temp, tempValue, tempTrend,
-        msg, msgTimestamp, msgUser, msgValue,
-        head, title, favicon, trend;
+
+    var doc = require("document"),
+        debug = require("debug"),
+
+        sede,
+        sedeValue,
+        sedeTimestamp,
+        sedeModifiedBy,
+        temp,
+        tempValue,
+        tempTrend,
+        msg,
+        msgTimestamp,
+        msgUser,
+        msgValue,
+        head,
+        title,
+        favicon,
+        trend;
 
     /* HELPERS */
 
     // Show a DOM hidden element
     function show(elem) {
+        debug.log("Showing", elem.id);
         elem.setAttribute("style", "display: block");
     }
 
     // Return a new string capitalized
     function capitalize(string) {
+        debug.log("Capitilizing string", string);
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     // Change the favicon icon of the site.
     function changeIcon(status) {
-        var link = exports.document.createElement("link");
+        debug.log("Changing favicon", status);
+        var link = doc.createElement("link");
         head.removeChild(favicon);
         link.href = "img/" + status + ".ico";
         link.rel = "shortcut icon";
@@ -37,6 +55,7 @@
     //      Respond to the toString message, transorm the object in an intelligible form.
     //      In this case the trend arcs.
     function Trend() {
+        debug.log("New Trend Object instanziated");
         this.oldValue = undefined;
         this.diff = 0;
     }
@@ -44,7 +63,9 @@
     Trend.prototype.newValue = function (value) {
         if (this.oldValue !== undefined) {
             this.diff = value - this.oldValue;
+            debug.log("The difference between the current temp and the old temp is", this.diff);
         }
+        debug.log("The value of the oldTemp is now", value);
         this.oldValue = value;
 
         return this;
@@ -60,37 +81,64 @@
         }
     };
 
+    function swith(elem, callback) {
+        if (elem !== undefined) {
+            debug.log(elem, "selected");
+            if (callback !== undefined) {
+                callback();
+            }
+        } else {
+            debug.error(elem, "not selectable");
+        }
+    }
+
     /* END HELPERS */
 
 
     /* DOM Selecting initialization */
-    exports.window.addEventListener("DOMContentLoaded", function () {
-        sede = exports.document.getElementById("sede");
-        sedeValue = sede.querySelector(".value");
-        sedeTimestamp = sede.querySelector(".timestamp");
-        sedeModifiedBy = sede.querySelector(".modified_by");
-        temp = exports.document.getElementById("temp");
-        tempValue = temp.querySelector(".value");
-        tempTrend = temp.querySelector(".trend");
-        msg = exports.document.querySelector("#last.msg");
-        msgUser = msg.querySelector(".user");
-        msgTimestamp = msg.querySelector(".timestamp");
-        msgValue = msg.querySelector(".value");
-        title = exports.document.title;
-        favicon = exports.document.querySelector('[rel="icon"]');
-        head = exports.document.head || exports.document.getElementsByTagName('head')[0];
+    main(function () {
+        sede = doc.getElementById("sede");
+        swith(sede, function () {
+            sedeValue = sede.querySelector(".value");
+            sedeTimestamp = sede.querySelector(".timestamp");
+            sedeModifiedBy = sede.querySelector(".modified_by");
+        });
+
+        temp = doc.getElementById("temp");
+        swith(temp, function () {
+            tempValue = temp.querySelector(".value");
+            tempTrend = temp.querySelector(".trend");
+        });
+
+        msg = doc.querySelector("#last.msg");
+        swith(msg, function () {
+            msgUser = msg.querySelector(".user");
+            msgTimestamp = msg.querySelector(".timestamp");
+            msgValue = msg.querySelector(".value");
+        });
+
+        title = doc.title;
+        swith(title);
+
+        favicon = doc.querySelector('[rel="icon"]');
+        swith(favicon);
+
+        head = doc.head || doc.getElementsByTagName('head')[0];
+        swith(head);
+
         trend = new Trend();
     });
 
     /* Handler functions definition */
     // Handle BITS status change.
     function statusHandler(status, first) {
+        debug.log("browserHandler handling status");
         if (first) {
             show(sede);
         }
         var value = status.value === "open" ? "open" : "close";
         changeIcon(value);
-        exports.document.title = capitalize(value) + " " + title;
+        doc.title = capitalize(value) + " " + title;
         sedeValue.setAttribute("class", value + " value");
         sedeTimestamp.innerHTML = status.timestamp;
         sedeModifiedBy.innerHTML = status.modifiedby;
@@ -98,6 +146,7 @@
 
     // Handle MSGs arrival (somewhere in the future)
     function msgHandler(msg, first) {
+        debug.log("MSG arrived but there isn't an handler");
         /* pass
         if(first) show(msg);
         msgUser.innerHTML = msg.user;
@@ -108,6 +157,8 @@
 
     // Handle tempInt arrival
     function tempIntHandler(tempInt, first) {
+        debug.log("browserHandler handling tempint");
+
         if (first) {
             show(temp);
         }
@@ -117,9 +168,7 @@
     }
 
     // Exports only the browserHandler object in the global scope
-    exports.browserHandler = {
-        status: statusHandler,
-        msg: msgHandler,
-        tempInt: tempIntHandler
-    };
-}(this));
+    exports.status = statusHandler;
+    exports.msg = msgHandler;
+    exports.tempInt = tempIntHandler;
+});
