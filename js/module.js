@@ -36,7 +36,9 @@
         exports.addEventListener("DOMContentLoded", loadPage, false);
         exports.addEventListener("load", loadPage, false);
     } else if (exports.attachEvent !== undefined) {
-        exports.attachEvent("load", loadPage);
+        exports.attachEvent("onload", loadPage);
+    } else {
+        exports.onload = loadPage;
     }
 
     exports.module = module;
