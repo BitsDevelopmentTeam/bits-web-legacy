@@ -26,12 +26,9 @@ body {
   padding: 0;
 }
 
-a[href="/"] {
-  text-decoration: none;
-  color: white;
-}
 
 header.logo {
+  display: block;
   position: relative;
   background: url("../img/bits_bg.png");
   margin-left: auto;

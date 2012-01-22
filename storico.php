@@ -22,12 +22,10 @@
   <link rel="icon" href="img/open.ico" id="favicon" />
 </head>
 <body>
-  <a href="/">
-    <header class="logo">
-      <h1>B.I.T.S.</h1>
-      <h2>Storico</h2>
-    </header>
- </a>
+  <header class="logo" onclick="location.href = 'http://bits.poul.org'">
+    <h1>B.I.T.S.</h1>
+    <h2>Storico</h2>
+  </header>
   <aside>
     <nav>
       <ul class="link">

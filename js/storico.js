@@ -1,21 +1,25 @@
-main(function (require) {
+module("storico", function (require, exports) {
     "use strict";
 
-    var Handler = require("handler").Handler,
-        storicoBrowserHandler = require("storico_browser_handler"),
-        WebSocket = require("websocket").WebSocket,
-        debug = require("debug"),
+    var XHR = require("XMLHttpRequest"),
+        url = "storico.php?type=JSON&page=";
+    
+    function setUrl(new_url) {
+        url = new_url;
+    }
+    
+    exports.setUrl = setUrl;
 
-        ws = new WebSocket("ws://bits.poul.org:3389"),
-        handler = new Handler(storicoBrowserHandler);
+    function page(num, callback) {
+        var xhr = new XHR();
+        xhr.open("GET", url + num, true);
+        xhr.onreadystatechange = function handler() {
+            if (xhr.readyState === 4) {
+                callback(xhr.responseText);
+            }
+        }
+        xhr.send(null);
+    }
 
-    debug.setLevel(3);
-
-    ws.onmessage = function (event) {
-        handler.webSocket(event);
-    };
-
-    ws.onerror = function (event) {
-        debug.error("WS Error", event);
-    };
+    exports.page = page;
 });
