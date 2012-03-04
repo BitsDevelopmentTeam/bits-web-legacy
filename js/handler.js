@@ -36,6 +36,11 @@ module("handler", function (require, exports) {
             this.diffHandler.tempInt(json.tempint, this.firstHandle);
         }
 
+        if (json.tempinthist !== undefined) {
+            debug.log("New tempIntHist", json.tempinthist);
+            this.diffHandler.tempIntHist(json.tempIntHist, this.firstHandle);
+        }
+
         if (this.firstHandle) {
             debug.log("First JSON arrived");
             this.firstHandle = false;

@@ -30,8 +30,8 @@ module("graph", function(require, exports) {
         return nary;
     }
 
-    function Temp(element, dimension, initial_data) {
-        Bluff.Line.call(this, element, dimension);
+    function Temp(element, initial_data) {
+        Bluff.Line.call(this, element);
 
         this._temp_data = dataFromArray(initial_data, dataFromHash);
         this._temp_label = dataFromArray(initial_data, labelFromHash);
