@@ -33,6 +33,9 @@ module("graph", function(require, exports) {
 
     function Temp(element, initial_data) {
         debug.log("Temp graph object created with data", initial_data);
+        if (!util.isArray(initial_data)) {
+            debug.error("the second argument of ", this.name, " must be an array");
+        }
         bluff.Line.call(this, element);
 
         this._temp_data = dataFromArray(initial_data, dataFromHash);
