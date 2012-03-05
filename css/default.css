@@ -173,3 +173,41 @@ nav#prec_next ul li {
 #sede .modified_by:before {
   content: "da ";
 }
+
+#bitsdesc {
+  margin: 5%;
+  text-align: left;
+}
+
+#bitsdesc #images {
+  text-align: center;
+}
+
+#bitsdesc img[src="bits_presence.png"] {
+  display: block;
+  margin: 0 auto;
+}
+
+#bitsdesc dt {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+#bitsdesc #languages {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: inline;
+}
+
+#bitsdesc #languages li {
+  display: inline;
+}
+
+#bitsdesc #languages li:after {
+  content: ",";
+}
+
+#bitsdesc #languages li.last:after {
+  content: "";
+}
