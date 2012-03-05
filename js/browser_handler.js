@@ -4,6 +4,7 @@ module("browser_handler", function (require, exports) {
     var doc = require("document"),
         debug = require("debug"),
         query = require("peppy").query,
+        graph = require("graph"),
 
         sede,
         sedeValue,
@@ -19,7 +20,10 @@ module("browser_handler", function (require, exports) {
         head,
         title,
         favicon,
-        trend;
+        trend,
+        tempGraph = new graph.Stub(),
+        tempCanvas, 
+        last_timestamp;
 
     /* HELPERS */
 
@@ -61,7 +65,7 @@ module("browser_handler", function (require, exports) {
         this.diff = 0;
     }
 
-    Trend.prototype.newValue = function (value) {
+    Trend.prototype.newValue = function (temp) {
         if (this.oldValue !== undefined) {
             this.diff = value - this.oldValue;
             debug.log("The difference between the current temp and the old temp is", this.diff);
@@ -127,6 +131,9 @@ module("browser_handler", function (require, exports) {
         head = doc.head || doc.getElementsByTagName('head')[0];
         swith(head);
 
+        tempCanvas = doc.getElementById("tempcanvas");
+        swith(tempCanvas);
+
         trend = new Trend();
     });
 
@@ -163,9 +170,23 @@ module("browser_handler", function (require, exports) {
         if (first) {
             show(temp);
         }
-        tempValue.innerHTML = tempInt.value.toPrecision(2) + "°C";
-        tempTrend.innerHTML = trend.newValue(tempInt.value);
+        tempValue.innerHTML = tempInt.value.toPrecision() + "°C";
+
+        if (last_timestamp !== tempInt.timestamp) {
+            tempTrend.innerHTML = trend.newValue(tempInt.value);
+            if (!first) {
+                tempGraph.addTemp(tempInt);
+            }
+        }
         temp.setAttribute("class", tempInt.value > 20 ? "high" : "low");
+    }
+
+    
+    function tempIntHistHandler(tempIntHist, first) {
+        if (first) {
+            show(tempCanvas);
+            tempGraph = new graph.Temp(tempCanvas, tempIntHist);
+        }
     }
 
     // Exports only the browserHandler object in the global scope
