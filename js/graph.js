@@ -9,8 +9,9 @@
 module("graph", function(require, exports) {
     "use strict";
 
-    var Bluff = require("Bluff"),
-        util = require("util");
+    var bluff = require("Bluff"),
+        util  = require("util"),
+        debug = require("debug");
 
     function dataFromHash(hash) {
         return hash["value"];
@@ -31,7 +32,8 @@ module("graph", function(require, exports) {
     }
 
     function Temp(element, initial_data) {
-        Bluff.Line.call(this, element);
+        debug.log("Temp graph object created with data", initial_data);
+        bluff.Line.call(this, element);
 
         this._temp_data = dataFromArray(initial_data, dataFromHash);
         this._temp_label = dataFromArray(initial_data, labelFromHash);
@@ -43,21 +45,26 @@ module("graph", function(require, exports) {
     util.inherits(Graph, Bluff.Line);
     exports.Temp = Temp;
 
-    TempGraph.prototype.addTemp = function(temp) {
+    Temp.prototype.addTemp = function(temp) {
+        debug.log("Graph, new temperature added", temp);
         this._temp_label.push(labelFromHash(temp));
         this._temp_data.push(dataFromHash(temp));
         this.update();
     };
 
-    TempGraph.prototype.update = function() {
+    Temp.prototype.update = function() {
+        debug.log("Graph, updating Temp graph");
         this.data("temp", this._temp_data);
         this.labels = this._temp_data;
         this.draw();
     };
 
     function Stub() {
+        debug.log("Stub graph object created");
     }
     exports.Stub = Stub;
 
-    Stub.prototype.addTemp = function() {};
+    Stub.prototype.addTemp = function() {
+        debug.log.apply(this, arguments);
+    };
 });
