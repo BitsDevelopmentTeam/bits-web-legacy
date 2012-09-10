@@ -64,7 +64,7 @@ module("browser_handler", function (require, exports) {
         this.diff = 0;
     }
 
-    Trend.prototype.newValue = function (temp) {
+    Trend.prototype.newValue = function (value) {
         if (this.oldValue !== undefined) {
             this.diff = value - this.oldValue;
             debug.log("The difference between the current temp and the old temp is", this.diff);
@@ -131,7 +131,7 @@ module("browser_handler", function (require, exports) {
         swith(head);
 
         tempGraph = doc.getElementById("temperature_graph");
-        swith(tempCanvas);
+        swith(tempGraph);
 
         trend = new Trend();
     });
@@ -182,14 +182,11 @@ module("browser_handler", function (require, exports) {
 
     
     function tempIntHistHandler(tempIntHist, first) {
-        if (first) {
-            show(tempCanvas);
-            tempGraph = new graph.Temp(tempCanvas, tempIntHist);
-        }
     }
 
     // Exports only the browserHandler object in the global scope
     exports.status = statusHandler;
     exports.msg = msgHandler;
     exports.tempInt = tempIntHandler;
+    exports.tempIntHist = tempIntHistHandler;
 });
