@@ -4,7 +4,7 @@ module("browser_handler", function (require, exports) {
     var doc = require("document"),
         debug = require("debug"),
         query = require("peppy").query,
-        graph = require("graph"),
+        raphael = require("Raphael"),
 
         sede,
         sedeValue,
@@ -21,9 +21,8 @@ module("browser_handler", function (require, exports) {
         title,
         favicon,
         trend,
-        tempGraph = new graph.Stub(),
-        tempCanvas, 
-        last_timestamp;
+        tempGraph,
+        lastTimestamp;
 
     /* HELPERS */
 
@@ -131,7 +130,7 @@ module("browser_handler", function (require, exports) {
         head = doc.head || doc.getElementsByTagName('head')[0];
         swith(head);
 
-        tempCanvas = doc.getElementById("tempcanvas");
+        tempGraph = doc.getElementById("temperature_graph");
         swith(tempCanvas);
 
         trend = new Trend();
@@ -172,7 +171,7 @@ module("browser_handler", function (require, exports) {
         }
         tempValue.innerHTML = tempInt.value.toPrecision() + "°C";
 
-        if (last_timestamp !== tempInt.timestamp) {
+        if (lastTimestamp !== tempInt.timestamp) {
             tempTrend.innerHTML = trend.newValue(tempInt.value);
             if (!first) {
                 tempGraph.addTemp(tempInt);
