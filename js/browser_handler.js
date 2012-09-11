@@ -4,7 +4,7 @@ module("browser_handler", function (require, exports) {
     var doc = require("document"),
         debug = require("debug"),
         query = require("peppy").query,
-        raphael = require("Raphael"),
+        Raphael = require("Raphael"),
 
         sede,
         sedeValue,
@@ -22,9 +22,31 @@ module("browser_handler", function (require, exports) {
         favicon,
         trend,
         tempGraph,
-        lastTimestamp;
+        lastTimestamp,
+        tempGraphValuesY = [],
+        tempGraphTimestampValues = [],
+        tempGraphHeight = 380,
+        tempGraphWidth = 380;
 
     /* HELPERS */
+
+    function seq(x, y) {
+        var container = [];
+
+        if (x < y) {
+            while (x < y) {
+                container[container.length] = x;
+                x++;
+            }
+        } else {
+            while (x < y) {
+                container[container.length] = x;
+                x--;
+            }
+        }
+
+        return container;
+    }
 
     // Show a DOM hidden element
     function show(elem) {
@@ -130,8 +152,7 @@ module("browser_handler", function (require, exports) {
         head = doc.head || doc.getElementsByTagName('head')[0];
         swith(head);
 
-        tempGraph = doc.getElementById("temperature_graph");
-        swith(tempGraph);
+        tempGraph = Raphael("temperature_graph", tempGraphWidth, tempGraphHeight);
 
         trend = new Trend();
     });
@@ -182,6 +203,25 @@ module("browser_handler", function (require, exports) {
 
     
     function tempIntHistHandler(tempIntHist, first) {
+        debug.log("browserHandler handling tempIntHist");
+        var cordX = 0,
+            cordY = 0,
+            reversedHistory = tempIntHist.reverse();
+
+        for (var i = 0; i < tempIntHist.length; i++) {
+            tempGraphValuesY[tempGraphValuesY.length] = tempIntHist[i].value;
+            tempGraphTimestampValues[tempGraphTimestampValues.length] = tempIntHist[i].timestamp;
+        }
+
+        tempGraph.linechart(
+            cordX, cordY,
+            tempGraphHeight, tempGraphWidth,
+            seq(0, tempGraphValuesY.length), tempGraphValuesY,
+            {
+                shade: true,
+                colors: ["#0F0"]
+            }
+        );
     }
 
     // Exports only the browserHandler object in the global scope
