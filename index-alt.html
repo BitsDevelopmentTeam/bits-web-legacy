@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>B.I.T.S. 2.0</title>
+  <link rel="stylesheet" type="text/css" href="./css/default.css" />
+  <link rel="stylesheet" type="text/css" href="./css/dalton.css" />
+  <link rel="icon" href="img/open.ico" id="favicon" />
+  <script src="js/raphael-min.js" type="text/javascript"></script>
+  <script src="js/g.raphael-min.js" type="text/javascript"></script>
+  <script src="js/g.line-min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/json2.js"></script>
+  <script type="text/javascript" src="js/module.js"></script>
+  <script type="text/javascript" src="js/debug.js"></script>
+  <script type="text/javascript" src="js/html5.js"></script>
+  <script src="js/peppy.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="js/browser_handler.js"></script>
+  <script src="js/handler.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/websocket.js"></script>
+  <script src="js/index_main.js" type="text/javascript"></script>
+</head>
+<body>
+  <header class="logo" onclick="location.href = 'http://bits.poul.org'">
+    <h1>B.I.T.S.</h1>
+    <h2>System&nbsp;&nbsp;2.0</h2>
+  </header>
+  <aside>
+    <nav>
+      <ul class="link">
+        <li>
+          <a href="http://www.poul.org">Cos'è il POuL</a>
+        </li>
+        <li>
+          <a href="bits_info.html">Cos'è BITS</a>
+        </li>
+        <li>
+          <a href="storico.php">Leggi i log degli accessi</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <article class="status">
+    <ul>
+      <li id="sede">
+        <div class="value"></div>
+        <div class="timestamp"></div>
+        <div class="modified_by"></div>
+      </li>
+      <li id="temp" class="">
+        <div class="value"></div>
+        <div class="trend"></div>
+      </li>
+      <li id="last" class="msg ">
+        <div class="user"></div>
+        <div class="timestamp"></div>
+        <div class="value"></div>
+      </li>
+      <li id="graphs">
+        <img src="bits_presence.png" alt="Grafico delle presenze" id="presence_graph"/>
+        <div id="temperature_graph" />
+      </li>
+    </ul>
+  </article>
+</body>
+</html>
