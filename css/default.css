@@ -6,7 +6,6 @@ html {
   color: #FFFFFF;
   text-align: center;
   font-family: sans;
-  -webkit-filter: hue-rotate(90deg);
 }
 
 a {
