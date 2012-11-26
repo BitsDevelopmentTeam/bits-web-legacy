@@ -1,9 +1,9 @@
 @charset "utf-8";
 
 html {
-  --webkit-filter: hue-rotate(90deg);
-  --moz-filter: hue-rotate(90deg);
-  --ms-filter: hue-rotate(90deg);
-  --o-filter: hue-rotate(90deg);
+  -webkit-filter: hue-rotate(90deg);
+  -moz-filter: hue-rotate(90deg);
+  -ms-filter: hue-rotate(90deg);
+  -o-filter: hue-rotate(90deg);
   filter: hue-rotate(90deg);
 }
